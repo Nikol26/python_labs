@@ -1,9 +1,3 @@
-price=int(input())
-discount=int(input())
-vat=int(input())
-base=price*(1-discount/100)
-vat_amount=base*(vat/100)
-total=base+vat_amount
-print(base,'$')
-print(vat_amount,'$')
-print(total,'$')
+name=input("Имя: ")
+age=int(input("Возраст: "))
+print(f"Привет, {name}! Через год тебе будет {age+1}.")
