@@ -4,4 +4,5 @@ a=a.replace(",",'.',1)
 b=b.replace(",",".",1)
 a=float(a)
 b=float(b)
-print(f"sum={(a+b):.2f};avg={((a+b)/2):.2f}")
+print(f"sum={(a+b):.2f};avg={((a+b)/2):.223"
+      f"45f}")
