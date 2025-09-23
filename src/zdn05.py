@@ -1,6 +1,5 @@
-a=input("ФИО: ")
-d=len(a)
-c=a.split(" ")
-b=c[0][:1]+c[1][:1]+c[2][:1]+'.'
-print(b)
-print(d)
+f=input("ФИО: ")
+n=f.split()
+i=n[0][:1]+n[1][:1]+n[2][:1]+'.'
+print(i)
+print(len(f.replace('  ',' ')))
