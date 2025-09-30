@@ -1,6 +1,6 @@
-# Лабораторная работа
+## Лабораторная работа
 
-## задание 1
+# задание 1
 <img width="1257" height="1161" alt="lab_1_ex_1" src="https://github.com/user-attachments/assets/045d4337-0f27-4b8e-aaa8-2cc964395c49" />
 
 # задание 2
