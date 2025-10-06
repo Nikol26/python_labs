@@ -44,7 +44,8 @@ print(flatten(([1, 2], (3, 4, 5))))
 print(flatten([[1], [], [2, 3]]))
 print(flatten([[1, 2], "ab"]))
 </code></pre>
-<img width="655" height="445" alt="laba_2_1 3" src="https://github.com/user-attachments/assets/1acef4b4-a4b9-47aa-9547-17fd0cc96a76" />
+<img width="705" height="404" alt="lab_2_1 3" src="https://github.com/user-attachments/assets/c925e418-6be6-4187-9a19-824a259e38af" />
+
 
   
   
