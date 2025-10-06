@@ -16,7 +16,8 @@ print(min_max([-5, -2, -9]))
 print(min_max([1.5, 2, 2.0, -3.1]))
 print(min_max([]))
 </code></pre>
-<img width="676" height="475" alt="laba_2_1 1" src="https://github.com/user-attachments/assets/f3703597-4959-4a01-9831-a15a841ab9d1" />
+<img width="623" height="438" alt="lab_2_1 1" src="https://github.com/user-attachments/assets/50859b00-edd9-44db-8f02-497131c2052a" />
+
 
 ## unique_sorted
 <pre><code>
