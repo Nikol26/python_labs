@@ -29,6 +29,27 @@ print(unique_sorted([1.0,1,2.5,2.5,0]))
 </code></pre>
 <img width="503" height="294" alt="laba_2_1 2" src="https://github.com/user-attachments/assets/72b88ea5-d04f-4861-97de-fe6c058db92c" />
 
+## flatten
+<pre><code>
+  def flatten(mat: list[list | tuple]) -> list:
+    answ = []
+    for container in mat:
+        if not isinstance(container, (list, tuple)):
+            raise TypeError("The element must be be a list or tuple")
+        for item in container:
+            answ.append(item)
+    return answ
+print(flatten([[1, 2], [3, 4]]))
+print(flatten(([1, 2], (3, 4, 5))))
+print(flatten([[1], [], [2, 3]]))
+print(flatten([[1, 2], "ab"]))
+</code></pre>
+<img width="655" height="445" alt="laba_2_1 3" src="https://github.com/user-attachments/assets/1acef4b4-a4b9-47aa-9547-17fd0cc96a76" />
+
+  
+  
+
+
 
 
 
