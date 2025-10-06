@@ -1,6 +1,7 @@
-# Лабораторная работа 2
+# ЛР2 — Коллекции и матрицы (list/tuple/set/dict)
 
-## задание 1
+## Задание 1 — arrays.py
+## min_max
 <pre><code>
   def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
     if not nums:
@@ -16,6 +17,17 @@ print(min_max([1.5, 2, 2.0, -3.1]))
 print(min_max([]))
 </code></pre>
 <img width="676" height="475" alt="laba_2_1 1" src="https://github.com/user-attachments/assets/f3703597-4959-4a01-9831-a15a841ab9d1" />
+## unique_sorted
+<pre><code>
+  def unique_sorted(nums):
+    return sorted(set(nums))
+print(unique_sorted([3,1,2,1,3]))
+print(unique_sorted([]))
+print(unique_sorted([-1,-1,0,2,2]))
+print(unique_sorted([1.0,1,2.5,2.5,0]))
+</code></pre>
+<img width="503" height="294" alt="laba_2_1 2" src="https://github.com/user-attachments/assets/72b88ea5-d04f-4861-97de-fe6c058db92c" />
+
 
 
 
