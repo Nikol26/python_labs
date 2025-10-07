@@ -116,6 +116,7 @@ print(col_sums([[0, 0], [0, 0]]))
 print(col_sums([[1, 2], [3]]))
 </code></pre>
 <img width="656" height="490" alt="laba_2_2_3" src="https://github.com/user-attachments/assets/38d6d028-c6b9-406c-8547-41aeba783414" />
+
 ## Задание C — tuples.py
 <pre><code>
   from typing import Tuple
