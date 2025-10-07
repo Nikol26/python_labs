@@ -119,13 +119,21 @@ print(col_sums([[1, 2], [3]]))
 
 # Задание C — tuples.py
 <pre><code>
-  from typing import Tuple
+from typing import Tuple
 
 StudentRecord = Tuple[str, str, float]
 
 def format_record(rec: StudentRecord) -> str:
+    if len(rec) != 3:
+        raise ValueError
     fio, group, gpa = rec
+    if not isinstance(gpa, (int, float)):
+        raise ValueError
+    if gpa < 0 or gpa > 5:
+        raise ValueError
     fio_parts = [part.strip() for part in fio.split()]
+    if len(fio_parts) < 2:
+        raise ValueError
     formatted_surname = fio_parts[0].capitalize()
     initials = ''.join([f'{name[0].upper()}.' for name in fio_parts[1:]])
     formatted_gpa = f'{gpa:.2f}'
@@ -142,7 +150,8 @@ print(format_record(c))
 print(format_record(d))
 print(format_record(e))
 </code></pre>  
-<img width="581" height="578" alt="image" src="https://github.com/user-attachments/assets/c1806592-89f3-49ec-ad89-dbc5e8146ef5" />
+<img width="730" height="583" alt="image" src="https://github.com/user-attachments/assets/fdf066dd-4a8a-46ec-b775-31c1ac2b4474" />
+
 
   
 
