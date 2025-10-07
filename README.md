@@ -1,6 +1,6 @@
 # ЛР2 — Коллекции и матрицы (list/tuple/set/dict)
 
-## Задание A — arrays.py
+# Задание A — arrays.py
 ## min_max
 <pre><code>
   def min_max(nums: list[float | int]) -> tuple[float | int, float | int]:
@@ -47,7 +47,7 @@ print(flatten([[1, 2], "ab"]))
 </code></pre>
 <img width="705" height="404" alt="lab_2_1 3" src="https://github.com/user-attachments/assets/c925e418-6be6-4187-9a19-824a259e38af" />
 
-## Задание B — matrix.py
+# Задание B — matrix.py
 ## transpose
 <pre><code>
   def check_rectangular(mat):
@@ -117,7 +117,7 @@ print(col_sums([[1, 2], [3]]))
 </code></pre>
 <img width="656" height="490" alt="laba_2_2_3" src="https://github.com/user-attachments/assets/38d6d028-c6b9-406c-8547-41aeba783414" />
 
-## Задание C — tuples.py
+# Задание C — tuples.py
 <pre><code>
   from typing import Tuple
 
