@@ -1,30 +1,20 @@
-from typing import Tuple
-
-StudentRecord = Tuple[str, str, float]
-
-def format_record(rec: StudentRecord) -> str:
-    if len(rec) != 3:
-        raise ValueError
-    fio, group, gpa = rec
-    if not isinstance(gpa, (int, float)):
-        raise ValueError
-    if gpa < 0 or gpa > 5:
-        raise ValueError
-    fio_parts = [part.strip() for part in fio.split()]
+def format_record(student: tuple[str, str, float]) -> str:
+    if len(student) != 3: 
+        return "ValueError"
+    if not (isinstance(student[0], str) and isinstance(student[1], str) and isinstance(student[2], float)): 
+        return "TypeError"
+    fio_parts = student[0].split() 
     if len(fio_parts) < 2:
-        raise ValueError
-    formatted_surname = fio_parts[0].capitalize()
-    initials = ''.join([f'{name[0].upper()}.' for name in fio_parts[1:]])
-    formatted_gpa = f'{gpa:.2f}'
-    formatted_record = f"{formatted_surname} {initials}, гр. {group}, GPA {formatted_gpa}"
-    return formatted_record
-a = ("Иванов Иван Иванович","BIVT-25",4.6)
-b = ("Петров Пётр", "IKBO-12", 5.0)
-c = ("Петров Пётр Петрович", "IKBO-12", 5.0)
-d = ("  сидорова  анна   сергеевна ", "ABB-01", 3.999)
-e = ("Иванов Иван Иванович","BIVT-25")
-print(format_record(a))
-print(format_record(b))
-print(format_record(c))
-print(format_record(d))
-print(format_record(e))
+        return "ValueError: ФИО должно содержать фамилию и имя"
+    fio_parts = [part.strip() for part in fio_parts if part.strip()]
+    res = fio_parts[0].title() + " " + fio_parts[1][0].upper()
+    if len(fio_parts) == 3:
+        res += "." + fio_parts[2][0].upper() + "., "  
+        res += "., "  
+    res += "гр. " + student[1] + ", GPA " + f"{round(student[2],2):.2f}" 
+    return res 
+print(format_record(("Иванов Иван Иванович","BIVT-25",4.6)))
+print(format_record(("Петров Пётр", "IKBO-12", 5.0)))
+print(format_record(("Петров Пётр Петрович", "IKBO-12", 5.0)))
+print(format_record(("  сидорова  анна   сергеевна ", "ABB-01", 3.999)))
+print(format_record(("Иванов Иван Иванович","BIVT-25", 4.5)))
