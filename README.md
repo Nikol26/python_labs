@@ -57,6 +57,7 @@ freq_example_2 = count_freq(tokens_example_2)
 print(top_n(freq_example_2, n=2))
 </code></pre>
 <img width="490" height="435" alt="image" src="https://github.com/user-attachments/assets/1e2fb9e0-67c7-4fbd-87d6-cb66db251c8b" />
+
 # Задание B — src/text_stats.py (скрипт со stdin)
 <pre><code>
 import sys
