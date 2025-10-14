@@ -58,6 +58,46 @@ print(top_n(freq_example_2, n=2))
 </code></pre>
 <img width="490" height="435" alt="image" src="https://github.com/user-attachments/assets/1e2fb9e0-67c7-4fbd-87d6-cb66db251c8b" />
 
+# Задание B — src/text_stats.py (скрипт со stdin)
+<pre><code>
+import sys
+sys.path.append(r'C:\Users\VektorVkusoff\.vscode\python_labs\src')
+
+from text import normalize, tokenize, count_freq, top_n
+
+def table(arr: list[tuple[str, int]], isTable: bool = True) -> str:
+    if not arr:
+        return "(нет данных)"
+    s = str()
+    if isTable:
+        word_col_width = max(len("слово"), max(len(a[0]) for a in arr))
+        freq_col_width = max(len("частота"), max(len(str(a[1])) for a in arr))
+        s += f"{'слово'.ljust(word_col_width)} | {'частота'.rjust(freq_col_width)}"
+        s += "\n" + "-" * word_col_width + "-+-" + "-" * freq_col_width
+        for word, freq in arr:
+            s += f"\n{word.ljust(word_col_width)} | {str(freq).rjust(freq_col_width)}"
+        return s
+    else:
+        return "\n".join(f"{a[0]}: {a[1]}" for a in arr)
+def main(text: str):
+    text = text.strip()
+    tokens = normalize(text)
+    tokens = tokenize(tokens)
+    freqs = count_freq(tokens)
+    total_words = len(tokens)
+    unique_words = len(freqs)
+    print(f"Всего слов: {total_words}")
+    print(f"Уникальных слов: {unique_words}")
+    top5 = sorted(freqs.items(), key=lambda x: x[1], reverse=True)[:5]
+    print("Топ-5:")
+    print(table(top5, True))
+</code></pre>
+<img width="569" height="460" alt="image" src="https://github.com/user-attachments/assets/8edfb127-8cc7-42b3-8bec-90574d9ec22e" />
+
+    
+    
+
+
 
 
   
