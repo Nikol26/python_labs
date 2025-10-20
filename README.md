@@ -34,6 +34,8 @@ print(read_text(r"C:\Users\VektorVkusoff\OneDrive\Документы\GitHub\pyth
 write_csv([("word","count"),("test",3)], r"C:\Users\VektorVkusoff\OneDrive\Документы\GitHub\python_labs\data\check.csv") 
 </code></pre>
 <img width="868" height="569" alt="image" src="https://github.com/user-attachments/assets/42543c22-0bb6-4b09-b211-18058208ee62" />
+<img width="711" height="607" alt="image" src="https://github.com/user-attachments/assets/a05758c9-7485-4def-a329-2c95e291ec80" />
+
 
 
 
