@@ -1,32 +1,30 @@
-import sys
-
-
-from text import normalize, tokenize, count_freq, top_n
-
-def table(arr: list[tuple[str, int]], isTable: bool = True) -> str:
-    if not arr:
-        return "(нет данных)"
-    s = str()
-    if isTable:
-        word_col_width = max(len("слово"), max(len(a[0]) for a in arr))
-        freq_col_width = max(len("частота"), max(len(str(a[1])) for a in arr))
-        s += f"{'слово'.ljust(word_col_width)} | {'частота'.rjust(freq_col_width)}"
-        s += "\n" + "-" * word_col_width + "-+-" + "-" * freq_col_width
-        for word, freq in arr:
-            s += f"\n{word.ljust(word_col_width)} | {str(freq).rjust(freq_col_width)}"
-        return s
-    else:
-        return "\n".join(f"{a[0]}: {a[1]}" for a in arr)
-def main(text: str):
-    text = text.strip()
-    tokens = normalize(text)
-    tokens = tokenize(tokens)
-    freqs = count_freq(tokens)
-    total_words = len(tokens)
-    unique_words = len(freqs)
-    print(f"Всего слов: {total_words}")
-    print(f"Уникальных слов: {unique_words}")
-    top5 = sorted(freqs.items(), key=lambda x: x[1], reverse=True)[:5]
-    print("Топ-5:")
-    print(table(top5, True))
-main(sys.stdin.buffer.read().decode())
+from pathlib import Path
+import csv
+import os
+from typing import Iterable, Sequence
+def read_text(path: str | Path, encoding: str = "utf-8") -> str:
+    try:
+        return Path(path).read_text(encoding=encoding)
+    except FileNotFoundError:
+        return "Такого файла нету"
+    except UnicodeDecodeError:
+        return "Неудалось изменить кодировку"
+def write_csv(rows: list[tuple | list], path: str | Path, header: tuple[str, ...] | None = None) -> None:
+    p = Path(path)
+    with p.open('w', newline="", encoding="utf-8") as file:
+        file_c = csv.writer(file)   
+        if header is None and rows == []:
+            file_c.writerow(('a', 'b'))
+        if header is not None:
+            file_c.writerow(header)
+        if rows != []:
+            const = len(rows[0])
+            for i in rows:
+                if len(i) != const:
+                    return ValueError
+        file_c.writerows(rows)
+def ensure_parent_dir(path: str | Path) -> None:
+    path = os.path.dirname(path)
+    Path(path).mkdir(parents=True, exist_ok=True)
+print(read_text(r"C:\Users\VektorVkusoff\OneDrive\Документы\GitHub\python_labs\data\input.txt"))
+write_csv([("word","count"),("test",3)], r"C:\Users\VektorVkusoff\OneDrive\Документы\GitHub\python_labs\data\check.csv") 
