@@ -1,3 +1,7 @@
+import os, csv 
+from text import tokenize, top_n, normalize
+from zdn02 import read_text, ensure_parent_dir
+from zdn01 import count_freq
 in1 = True
 if in1:
     print("Режим один файл:")
@@ -11,7 +15,7 @@ if in1:
     sorted_words = sorted(freqs.items(), key=lambda x: (-x[1], x[0]))
 
     output_dir = r"C:\Users\VektorVkusoff\OneDrive\Документы\GitHub\python_labs\data"
-    create_directory(r"C:\Users\eniko\PycharmProjects\PythonProject\data")
+    ensure_parent_dir(r"C:\Users\VektorVkusoff\OneDrive\Документы\GitHub\python_labs\data")
 
     output_path = os.path.join(output_dir, "report.csv")
     with open(output_path, "w", encoding="cp65001", newline="") as f:
@@ -22,4 +26,5 @@ if in1:
     print(f"Всего слов: {total_words}")
     print(f"Уникальных слов: {unique_words}")
     print("Топ-5:")
-    print(table(top_n(freqs, 5), True))
+    for i in sorted_words:
+        print(i[0],i[1])
