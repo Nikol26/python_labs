@@ -2,7 +2,7 @@
 
 ## Задание А - JSON ↔ CSV
 <pre><code>
-  import csv
+import csv
 import json
 import sys
 import os
