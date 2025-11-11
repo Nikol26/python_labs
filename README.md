@@ -1,8 +1,8 @@
 # Лабораторная работа №5
 
 ## Задание А - JSON ↔ CSV
-<pre><code>
 ```python
+<pre><code>
 import csv
 import json
 import sys
