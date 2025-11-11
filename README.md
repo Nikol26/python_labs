@@ -2,7 +2,6 @@
 
 ## Задание А - JSON ↔ CSV
 ```python
-<pre><code>
 import csv
 import json
 import sys
