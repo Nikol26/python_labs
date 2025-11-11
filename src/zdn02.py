@@ -37,3 +37,8 @@ def csv_to_xlsx(csv_path: str | Path, xlsx_path: str | Path) -> None:
     return "Выполнено успешно"
 
 print (csv_to_xlsx('src/people.csv', 'src/people.xlsx'))
+
+git pull origin laba_5
+git add .
+git commit -m "Merge remote changes"
+git push origin laba_5
