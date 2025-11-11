@@ -1,6 +1,7 @@
 # Лабораторная работа №5
 
 ## Задание А - JSON ↔ CSV
+```python
 <pre><code>
 import csv
 import json
@@ -49,8 +50,17 @@ def csv_to_json(csv_path: str, json_path: str) -> None: #функция конв
                                                                 #indent=4 - красивое форматирование с отступами
 csv_to_json(r'C:\Users\VektorVkusoff\.vscode\python_labs\src\people.csv', r'C:\Users\VektorVkusoff\.vscode\python_labs\src\people_from_csv.json')
 
-json_to_csv(r'C:\Users\VektorVkusoff\.vscode\python_labs\src\people.json', r'C:\Users\VektorVkusoff\.vscode\python_labs\src\people_from_json.csv')    
+json_to_csv(r'C:\Users\VektorVkusoff\.vscode\python_labs\src\people.json', r'C:\Users\VektorVkusoff\.vscode\python_labs\src\people_from_json.csv')
+``` 
 </code></pre>  
+<img width="270" height="124" alt="image" src="https://github.com/user-attachments/assets/4d8aaadf-1375-4bfe-88fe-8d07b74e1a12" />
+<img width="279" height="143" alt="image" src="https://github.com/user-attachments/assets/312eb193-a4f1-4357-acb2-01be5b0f627c" />
+<img width="348" height="143" alt="image" src="https://github.com/user-attachments/assets/5d7733ee-0e02-4ce3-bbaf-b94af7692651" />
+<img width="245" height="98" alt="image" src="https://github.com/user-attachments/assets/0fbb3b69-8e7c-4572-b2b3-823cbee14c7a" />  
+
+
+
+
 
 
 
