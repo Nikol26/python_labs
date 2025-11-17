@@ -1,1 +1,1 @@
-print("lalalalalla32E242")
+print('123456')
