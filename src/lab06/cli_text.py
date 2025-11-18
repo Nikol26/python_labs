@@ -1,11 +1,6 @@
-import argparse
-import sys
-import os
+import argparse , sys , os
 
 def cat_command(input_file: str, number_lines: bool = False):
-    """
-    Выводит содержимое файла
-    """
     if not os.path.exists(input_file):
         print(f"Ошибка: файл '{input_file}' не найден", file=sys.stderr)
         sys.exit(1)
@@ -22,9 +17,6 @@ def cat_command(input_file: str, number_lines: bool = False):
         sys.exit(1)
 
 def stats_command(input_file: str, top_n: int = 5):
-    """
-    Анализирует частоту слов в файле
-    """
     if not os.path.exists(input_file):
         print(f"Ошибка: файл '{input_file}' не найден", file=sys.stderr)
         sys.exit(1)
@@ -37,26 +29,24 @@ def stats_command(input_file: str, top_n: int = 5):
         with open(input_file, 'r', encoding='utf-8-sig') as file:
             text = file.read()
             
-            words = text.lower().split()
-            cleaned_words = [word.strip('.,!?;:()[]{}"\'') for word in words if word.strip('.,!?;:()[]{}"\'')]
-            
-            word_count = {}
-            for word in cleaned_words:
-                word_count[word] = word_count.get(word, 0) + 1
-            
-            print(f"Всего слов: {sum(word_count.values())}")
-            print(f"Уникальных слов: {len(word_count)}")
-            print(f"Топ-{top_n}:")
-            print("слово     | частота")
-            print("---")
-            
-            sorted_words = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
-            
-            # Автоматическое выравнивание
-            max_word_length = max(len(word) for word, _ in sorted_words[:top_n])
-            
-            for word, count in sorted_words[:top_n]:
-                print(f"{word:<{max_word_length}} | {count}")
+        words = text.lower().split()
+        cleaned_words = [word.strip('.,!?;:()[]{}"\'') for word in words if word.strip('.,!?;:()[]{}"\'')]
+        
+        word_count = {}
+        for word in cleaned_words:
+            word_count[word] = word_count.get(word, 0) + 1
+        
+        print(f"Всего слов: {sum(word_count.values())}")
+        print(f"Уникальных слов: {len(word_count)}")
+        print(f"Топ-{top_n}:")
+        print("слово     | частота")
+        print("---")
+        
+        sorted_words = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
+        max_word_length = max(len(word) for word, _ in sorted_words[:top_n])
+        
+        for word, count in sorted_words[:top_n]:
+            print(f"{word:<{max_word_length}} | {count}")
                 
     except Exception as e:
         print(f"Ошибка при анализе файла: {e}", file=sys.stderr)
@@ -67,12 +57,12 @@ def main():
     subparsers = parser.add_subparsers(dest="command", required=True)
     
     cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
-    cat_parser.add_argument("--input", required=True, help="Путь к файлу")
+    cat_parser.add_argument("--input", required=True)
     cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки")
     
     stats_parser = subparsers.add_parser("stats", help="Анализ частот слов")
-    stats_parser.add_argument("--input", required=True, help="Путь к файлу")
-    stats_parser.add_argument("--top", type=int, default=5, help="Количество топ-слов")
+    stats_parser.add_argument("--input", required=True)
+    stats_parser.add_argument("--top", type=int, default=5)
     
     args = parser.parse_args()
     

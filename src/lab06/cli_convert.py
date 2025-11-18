@@ -3,130 +3,101 @@ import sys
 import os
 import json
 import csv
+import os, csv, sys
 
-def check_file_exists(file_path: str):
-    """Проверяет существует ли файл"""
-    if not os.path.exists(file_path):
-        print(f"Ошибка: файл '{file_path}' не найден", file=sys.stderr)
+from openpyxl import Workbook
+
+def csv_to_xlsx(csv_path: str, xlsx_path: str) -> None:
+    if not os.path.exists(csv_path):
+        print("FileNotFoundError")
         sys.exit(1)
 
-def json_to_csv(input_file: str, output_file: str):
-    """Конвертирует JSON в CSV"""
-    print("JSON -> CSV")
-    check_file_exists(input_file)
+    if os.path.getsize(csv_path) == 0:
+        print("ValueError")
+        sys.exit(1)
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Sheet1"
+
+    with open(csv_path, "r", encoding="utf-8") as csv_file:
+        reader = csv.reader(csv_file)
+        for row in reader:
+            ws.append(row)
+
+
+    for column_cells in ws.columns:
+        max_length = 0
+        column_letter = column_cells[0].column_letter
+        for cell in column_cells:
+            if cell.value:
+                max_length = max(max_length, len(str(cell.value)))
+        ws.column_dimensions[column_letter].width = max(max_length + 2, 8)
+    wb.save(xlsx_path)
+
+
+
+def file_exists(file_path: str):
+    return os.path.exists(file_path)
+
+def convert_json_to_csv(input_file: str, output_file: str):
+    with open(input_file, 'r', encoding='utf-8') as f:
+        data = json.load(f)
     
-    try:
-        # Пробуем разные кодировки
-        for encoding in ['utf-8', 'utf-8-sig', 'utf-16']:
-            try:
-                with open(input_file, 'r', encoding=encoding) as f:
-                    data = json.load(f)
-                
-                if isinstance(data, list) and len(data) > 0:
-                    with open(output_file, 'w', encoding='utf-8', newline='') as f:
-                        writer = csv.DictWriter(f, fieldnames=data[0].keys())
-                        writer.writeheader()
-                        writer.writerows(data)
-                    print(f"Успешно: {input_file} -> {output_file}")
-                    return  # Успешно
-                else:
-                    print("Ошибка: JSON должен содержать список словарей")
-                    sys.exit(1)
-                    
-            except UnicodeDecodeError:
-                continue  # Пробуем следующую кодировку
-        
-        # Если ни одна кодировка не подошла
-        print("Ошибка: Не удается прочитать файл (проблема с кодировкой)")
-        sys.exit(1)
-            
-    except Exception as e:
-        print(f"Ошибка: {e}")
-        sys.exit(1)
+    with open(output_file, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=data[0].keys())
+        writer.writeheader()
+        writer.writerows(data)
 
-def csv_to_json(input_file: str, output_file: str):
-    """Конвертирует CSV в JSON"""
-    print("CSV -> JSON") 
-    check_file_exists(input_file)
+def convert_csv_to_json(input_file: str, output_file: str):
+    with open(input_file, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        data = list(reader)
     
-    try:
-        # Пробуем разные кодировки
-        for encoding in ['utf-8', 'utf-8-sig', 'utf-16']:
-            try:
-                with open(input_file, 'r', encoding=encoding) as f:
-                    reader = csv.DictReader(f)
-                    data = list(reader)
-                
-                with open(output_file, 'w', encoding='utf-8') as f:
-                    json.dump(data, f, indent=2, ensure_ascii=False)
-                print(f"Успешно: {input_file} -> {output_file}")
-                return  # Успешно
-                    
-            except UnicodeDecodeError:
-                continue  # Пробуем следующую кодировку
-        
-        print("Ошибка: Не удается прочитать файл (проблема с кодировкой)")
-        sys.exit(1)
-            
-    except Exception as e:
-        print(f"Ошибка: {e}")
-        sys.exit(1)
-
-def csv_to_xlsx(input_file: str, output_file: str):
-    """Конвертирует CSV в XLSX"""
-    print("CSV -> XLSX")
-    check_file_exists(input_file)
-    
-    try:
-        # Пробуем разные кодировки
-        for encoding in ['utf-8', 'utf-8-sig', 'utf-16']:
-            try:
-                with open(input_file, 'r', encoding=encoding) as f:
-                    reader = csv.reader(f)
-                    data = list(reader)
-                
-                with open(output_file, 'w', encoding='utf-8') as f:
-                    for row in data:
-                        f.write(','.join(row) + '\n')
-                
-                print(f"Успешно: {input_file} -> {output_file}")
-                print("Для полной поддержки Excel установите библиотеку openpyxl")
-                return  # Успешно
-                    
-            except UnicodeDecodeError:
-                continue  # Пробуем следующую кодировку
-        
-        print("Ошибка: Не удается прочитать файл (проблема с кодировкой)")
-        sys.exit(1)
-            
-    except Exception as e:
-        print(f"Ошибка: {e}")
-        sys.exit(1)
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 def main():
-    parser = argparse.ArgumentParser(description="Конвертеры файлов")
-    subparsers = parser.add_subparsers(dest="command", required=True)
+    parser = argparse.ArgumentParser(description="Конвертер форматов файлов")
+    subparsers = parser.add_subparsers(dest="action", required=True)
     
-    json2csv_parser = subparsers.add_parser("json2csv", help="Конвертировать JSON в CSV")
-    json2csv_parser.add_argument("--in", dest="input", required=True, help="Входной JSON файл")
-    json2csv_parser.add_argument("--out", dest="output", required=True, help="Выходной CSV файл")
+    # JSON to CSV
+    json_csv = subparsers.add_parser("json2csv")
+    json_csv.add_argument("--in", dest="source", required=True)
+    json_csv.add_argument("--out", dest="target", required=True)
     
-    csv2json_parser = subparsers.add_parser("csv2json", help="Конвертировать CSV в JSON")
-    csv2json_parser.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
-    csv2json_parser.add_argument("--out", dest="output", required=True, help="Выходной JSON файл")
+    # CSV to JSON
+    csv_json = subparsers.add_parser("csv2json")
+    csv_json.add_argument("--in", dest="source", required=True)
+    csv_json.add_argument("--out", dest="target", required=True)
     
-    csv2xlsx_parser = subparsers.add_parser("csv2xlsx", help="Конвертировать CSV в XLSX")
-    csv2xlsx_parser.add_argument("--in", dest="input", required=True, help="Входной CSV файл")
-    csv2xlsx_parser.add_argument("--out", dest="output", required=True, help="Выходной XLSX файл")
+    # CSV to XLSX
+    csv_excel = subparsers.add_parser("csv2xlsx")
+    csv_excel.add_argument("--in", dest="source", required=True)
+    csv_excel.add_argument("--out", dest="target", required=True)
+
     
     args = parser.parse_args()
     
-    if args.command == "json2csv":
-        json_to_csv(args.input, args.output)
-    elif args.command == "csv2json":
-        csv_to_json(args.input, args.output)
-    elif args.command == "csv2xlsx":
-        csv_to_xlsx(args.input, args.output)
+    if not file_exists(args.source):
+        print(f"Ошибка: Файл {args.source} не найден")
+        sys.exit(1)
+    
+    try:
+        if args.action == "json2csv":
+            convert_json_to_csv(args.source, args.target)
+            print("JSON -> CSV: Успешно")
+            
+        elif args.action == "csv2json":
+            convert_csv_to_json(args.source, args.target)
+            print("CSV -> JSON: Успешно")
+            
+        elif args.action == "csv2xlsx":
+            csv_to_xlsx(args.source, args.target)
+            print("CSV -> XLSX: Успешно")
+            
+    except Exception as error:
+        print(f"Ошибка преобразования: {error}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
