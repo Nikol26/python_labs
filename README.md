@@ -1,18 +1,86 @@
-# Лабораторная работа
+# ЛР6 — CLI‑утилиты с argparse (cat/grep‑lite + конвертеры): Техническое задание
 
-## задание 1
-<img width="1257" height="1161" alt="lab_1_ex_1" src="https://github.com/user-attachments/assets/045d4337-0f27-4b8e-aaa8-2cc964395c49" />
+## cli_text.py
+```python
+import argparse , sys , os
 
-## задание 2
-<img width="1347" height="1126" alt="lab_1_ex_2" src="https://github.com/user-attachments/assets/eb38d45b-7785-41ef-8e2a-42de2929ee8d" />
+def cat_command(input_file: str, number_lines: bool = False):
+    if not os.path.exists(input_file):
+        print(f"Ошибка: файл '{input_file}' не найден", file=sys.stderr)
+        sys.exit(1)
+    
+    try:
+        with open(input_file, 'r', encoding='utf-8-sig') as file:
+            for i, line in enumerate(file, 1):
+                if number_lines:
+                    print(f"    {i} {line}", end='')
+                else:
+                    print(line, end='')
+    except Exception as e:
+        print(f"Ошибка при чтении файла: {e}", file=sys.stderr)
+        sys.exit(1)
 
-## задание 3
-<img width="1355" height="1197" alt="lab_1_ex_3" src="https://github.com/user-attachments/assets/4af7766a-6c43-43de-96b2-efd1d1bc48f9" />
+def stats_command(input_file: str, top_n: int = 5):
+    if not os.path.exists(input_file):
+        print(f"Ошибка: файл '{input_file}' не найден", file=sys.stderr)
+        sys.exit(1)
+    
+    if top_n <= 0:
+        print("Ошибка: --top должен быть положительным числом", file=sys.stderr)
+        sys.exit(1)
+    
+    try:
+        with open(input_file, 'r', encoding='utf-8-sig') as file:
+            text = file.read()
+            
+        words = text.lower().split()
+        cleaned_words = [word.strip('.,!?;:()[]{}"\'') for word in words if word.strip('.,!?;:()[]{}"\'')]
+        
+        word_count = {}
+        for word in cleaned_words:
+            word_count[word] = word_count.get(word, 0) + 1
+        
+        print(f"Всего слов: {sum(word_count.values())}")
+        print(f"Уникальных слов: {len(word_count)}")
+        print(f"Топ-{top_n}:")
+        print("слово     | частота")
+        print("---")
+        
+        sorted_words = sorted(word_count.items(), key=lambda x: x[1], reverse=True)
+        max_word_length = max(len(word) for word, _ in sorted_words[:top_n])
+        
+        for word, count in sorted_words[:top_n]:
+            print(f"{word:<{max_word_length}} | {count}")
+                
+    except Exception as e:
+        print(f"Ошибка при анализе файла: {e}", file=sys.stderr)
+        sys.exit(1)
 
-## задание 4
-<img width="1448" height="1131" alt="lab_1_ex_4" src="https://github.com/user-attachments/assets/05c5148c-833c-454c-af9a-0525ac8245dd" />
+def main():
+    parser = argparse.ArgumentParser(description="CLI-утилиты для работы с текстом")
+    subparsers = parser.add_subparsers(dest="command", required=True)
+    
+    cat_parser = subparsers.add_parser("cat", help="Вывести содержимое файла")
+    cat_parser.add_argument("--input", required=True)
+    cat_parser.add_argument("-n", action="store_true", help="Нумеровать строки")
+    
+    stats_parser = subparsers.add_parser("stats", help="Анализ частот слов")
+    stats_parser.add_argument("--input", required=True)
+    stats_parser.add_argument("--top", type=int, default=5)
+    
+    args = parser.parse_args()
+    
+    if args.command == "cat":
+        cat_command(args.input, args.n)
+    elif args.command == "stats":
+        stats_command(args.input, args.top)
+```
+## Вывод строк с номерами:
+<img width="632" height="55" alt="image" src="https://github.com/user-attachments/assets/4e80f7ff-c8df-4a59-8e9f-44382566a86d" />
+## Вывод топ слов:
+<img width="623" height="187" alt="image" src="https://github.com/user-attachments/assets/4d4dbc48-5686-436f-9da0-991d1e37226b" />
 
-## задание 5
-<img width="997" height="589" alt="lab_1_5_3" src="https://github.com/user-attachments/assets/e0e4f608-4350-4002-9c6b-6411960f2f3a" />
 
 
+if __name__ == "__main__":
+    main()
