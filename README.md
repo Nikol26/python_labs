@@ -166,9 +166,12 @@ if __name__ == "__main__":
     main()
 ```
 ## Вывод JSON -> CSV:
-<img width="677" height="41" alt="image" src="https://github.com/user-attachments/assets/5ebeff06-5ead-4b7d-bc0f-fdabf8c9bcda" />
-<img width="235" height="190" alt="image" src="https://github.com/user-attachments/assets/909a493b-ed5c-4553-9333-637674bcca51" />
-<img width="227" height="131" alt="image" src="https://github.com/user-attachments/assets/0ea3b4d9-3270-47bc-9e0b-72d881d165ec" />
+<img width="722" height="38" alt="image" src="https://github.com/user-attachments/assets/aa895381-991b-474b-adaa-d86a9a274126" />
+<img width="398" height="191" alt="image" src="https://github.com/user-attachments/assets/9cf4a50a-b0cb-431e-8c91-956084c6b6da" />
+<img width="331" height="183" alt="image" src="https://github.com/user-attachments/assets/3c8b1fdd-c5da-459f-8fff-0f7896e28b8e" />
+
+
+
 
 
 
