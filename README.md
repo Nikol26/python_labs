@@ -1,6 +1,6 @@
 # ЛР6 — CLI‑утилиты с argparse (cat/grep‑lite + конвертеры): Техническое задание
 
-## cli_text.py
+# cli_text.py
 ```python
 import argparse , sys , os
 
@@ -74,13 +74,14 @@ def main():
         cat_command(args.input, args.n)
     elif args.command == "stats":
         stats_command(args.input, args.top)
+if __name__ == "__main__":
+    main()
 ```
 ## Вывод строк с номерами:
 <img width="632" height="55" alt="image" src="https://github.com/user-attachments/assets/4e80f7ff-c8df-4a59-8e9f-44382566a86d" />
+
 ## Вывод топ слов:
 <img width="623" height="187" alt="image" src="https://github.com/user-attachments/assets/4d4dbc48-5686-436f-9da0-991d1e37226b" />
 
 
 
-if __name__ == "__main__":
-    main()
