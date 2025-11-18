@@ -78,10 +78,10 @@ if __name__ == "__main__":
     main()
 ```
 ## Вывод строк с номерами:
-<img width="632" height="55" alt="image" src="https://github.com/user-attachments/assets/4e80f7ff-c8df-4a59-8e9f-44382566a86d" />
+<img width="649" height="53" alt="image" src="https://github.com/user-attachments/assets/2aeca97e-abd7-4991-bc1e-47dd5bc355ab" />
 
 ## Вывод топ слов:
-<img width="623" height="187" alt="image" src="https://github.com/user-attachments/assets/4d4dbc48-5686-436f-9da0-991d1e37226b" />
+<img width="658" height="197" alt="image" src="https://github.com/user-attachments/assets/6838a07a-568c-486c-8437-db63d2d95499" />
 
 # cli_convert.py
 ``` python
