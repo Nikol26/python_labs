@@ -83,5 +83,96 @@ if __name__ == "__main__":
 ## Вывод топ слов:
 <img width="623" height="187" alt="image" src="https://github.com/user-attachments/assets/4d4dbc48-5686-436f-9da0-991d1e37226b" />
 
+# cli_convert.py
+``` python
+import argparse
+import sys
+import os
+import json
+import csv
+
+def file_exists(file_path: str):
+    return os.path.exists(file_path)
+
+def convert_json_to_csv(input_file: str, output_file: str):
+    with open(input_file, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    
+    with open(output_file, 'w', encoding='utf-8', newline='') as f:
+        writer = csv.DictWriter(f, fieldnames=data[0].keys())
+        writer.writeheader()
+        writer.writerows(data)
+
+def convert_csv_to_json(input_file: str, output_file: str):
+    with open(input_file, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        data = list(reader)
+    
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+def convert_csv_to_excel(input_file: str, output_file: str):
+    with open(input_file, 'r', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        data = list(reader)
+    
+    with open(output_file, 'w', encoding='utf-8') as f:
+        for row in data:
+            f.write(','.join(row) + '\n')
+
+def main():
+    parser = argparse.ArgumentParser(description="Конвертер форматов файлов")
+    subparsers = parser.add_subparsers(dest="action", required=True)
+    
+    # JSON to CSV
+    json_csv = subparsers.add_parser("json2csv")
+    json_csv.add_argument("--in", dest="source", required=True)
+    json_csv.add_argument("--out", dest="target", required=True)
+    
+    # CSV to JSON
+    csv_json = subparsers.add_parser("csv2json")
+    csv_json.add_argument("--in", dest="source", required=True)
+    csv_json.add_argument("--out", dest="target", required=True)
+    
+    # CSV to XLSX
+    csv_excel = subparsers.add_parser("csv2xlsx")
+    csv_excel.add_argument("--in", dest="source", required=True)
+    csv_excel.add_argument("--out", dest="target", required=True)
+    
+    args = parser.parse_args()
+    
+    if not file_exists(args.source):
+        print(f"Ошибка: Файл {args.source} не найден")
+        sys.exit(1)
+    
+    try:
+        if args.action == "json2csv":
+            convert_json_to_csv(args.source, args.target)
+            print("JSON -> CSV: Успешно")
+            
+        elif args.action == "csv2json":
+            convert_csv_to_json(args.source, args.target)
+            print("CSV -> JSON: Успешно")
+            
+        elif args.action == "csv2xlsx":
+            convert_csv_to_excel(args.source, args.target)
+            print("CSV -> XLSX: Успешно")
+            
+    except Exception as error:
+        print(f"Ошибка преобразования: {error}")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()
+```
+## Вывод JSON -> CSV:
+<img width="677" height="41" alt="image" src="https://github.com/user-attachments/assets/5ebeff06-5ead-4b7d-bc0f-fdabf8c9bcda" />
+<img width="235" height="190" alt="image" src="https://github.com/user-attachments/assets/909a493b-ed5c-4553-9333-637674bcca51" />
+<img width="227" height="131" alt="image" src="https://github.com/user-attachments/assets/0ea3b4d9-3270-47bc-9e0b-72d881d165ec" />
+
+
+
+
+
 
 
