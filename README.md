@@ -170,6 +170,19 @@ if __name__ == "__main__":
 <img width="398" height="191" alt="image" src="https://github.com/user-attachments/assets/9cf4a50a-b0cb-431e-8c91-956084c6b6da" />
 <img width="331" height="183" alt="image" src="https://github.com/user-attachments/assets/3c8b1fdd-c5da-459f-8fff-0f7896e28b8e" />
 
+## Вывод CSV -> JSON:
+<img width="722" height="37" alt="image" src="https://github.com/user-attachments/assets/5825d137-9a3f-4126-810a-df5e8c82a030" />
+
+## Вывод CSV -> XLSX:
+<img width="727" height="38" alt="image" src="https://github.com/user-attachments/assets/feadb797-a8e5-43f1-92e7-90fb9c4fea47" />
+
+## Help:
+<img width="541" height="183" alt="image" src="https://github.com/user-attachments/assets/5332948a-e517-4d59-8721-ddb47f0afa44" />
+
+
+
+
+
 
 
 
