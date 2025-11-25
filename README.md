@@ -348,5 +348,18 @@ def test_mixed_data_types(tmp_path):
     assert data[0]["string"] == "hello"
     assert data[0]["number"] == "123"
 ```
+# C. Стиль кода (black)
+<img width="949" height="88" alt="image" src="https://github.com/user-attachments/assets/37b902b0-8186-4d07-9c6f-242d86f453d2" />
+
+# ★ Дополнительное задание
+
+<img width="926" height="561" alt="image" src="https://github.com/user-attachments/assets/2cc9a5e7-9712-4740-b443-2f2c8db44d2b" />
+<img width="923" height="539" alt="image" src="https://github.com/user-attachments/assets/876dac8e-19f2-4959-90a2-ca7a8c2444eb" />
+<img width="922" height="278" alt="image" src="https://github.com/user-attachments/assets/b9e48449-b342-4a89-88f4-e7d59326aa15" />
+
+
+
+
+
 
 
