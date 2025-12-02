@@ -69,6 +69,7 @@ if __name__ == "__main__":
 <img width="583" height="71" alt="image" src="https://github.com/user-attachments/assets/4a74f061-6de7-4055-bd3a-bfeaadba9085" />
 
 # B. Реализовать модуль serialize.py
+```python
 import json
 import os
 from typing import List
@@ -140,9 +141,11 @@ if __name__ == "__main__":
         print("   Создайте его с данными студентов")
     
     print("=== Тест завершён ===")
+```
 <img width="470" height="88" alt="image" src="https://github.com/user-attachments/assets/ba0fce5e-f56c-4668-abb3-4617de73d577" />
 <img width="312" height="308" alt="image" src="https://github.com/user-attachments/assets/76792c67-2a0e-4ee0-9518-994a1977c572" />
 <img width="307" height="308" alt="image" src="https://github.com/user-attachments/assets/97a42695-e79a-48dd-9b4a-1e63846bfa7e" />
+
 
 
 
