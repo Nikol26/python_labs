@@ -87,7 +87,7 @@ if __name__ == "__main__":
     ```
 <img width="476" height="200" alt="ЛР 10 2" src="https://github.com/user-attachments/assets/0710f0e6-33df-42d2-b9ba-1d2bc1f78e7a" />
 
-# B. Реализовать SinglyLinkedList (src/lab10/linked_list.py)
+## B. Реализовать SinglyLinkedList (src/lab10/linked_list.py)
 ```python
 from typing import Any, Iterator, Optional
 
@@ -311,5 +311,6 @@ prev — ссылку на предыдущий узел.
 Пример текстовой визуализации:
 
 None <- [A] <-> [B] <-> [C] -> None
+
 
 
